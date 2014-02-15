@@ -1,0 +1,18 @@
+{
+  "name": "a-counter",
+  "private": true,
+  "dependencies": {
+    "polymer": "Polymer/polymer"
+  },
+  "homepage": "https://github.com/sjmiles/a-counter",
+  "_release": "0624bab867",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "0624bab867dd439a794d6a94efa5f5e8e2bfd19c"
+  },
+  "_source": "git://github.com/sjmiles/a-counter.git",
+  "_target": "master",
+  "_originalSource": "sjmiles/a-counter",
+  "_direct": true
+}

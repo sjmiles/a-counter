@@ -1,0 +1,81 @@
+<link rel="import" href="a-counter.html">
+<!--
+/**
+ * 
+ * Animation Counter
+ * 
+ * 
+ * 
+ * @class a-clock
+ * @blurb An animated counter based on Polymer
+ * @author ghostoy
+ * 
+ * 
+**/
+-->
+<polymer-element name="a-clock" attributes="12hours">
+	<template>
+		<style>
+		:host {
+			display	: -webkit-flex;
+			display	: -moz-flex;
+			display	: -ms-flex;
+			display	: -ms-flexbox;
+			display	: -o-flex;
+			display	: flex;
+		}
+		#time {
+			-webkit-flex: 8 8;
+			-moz-flex: 8 8;
+			-ms-flex: 8 8;
+			-o-flex: 8 8;
+			flex: 8 8;
+		}
+		#ampm {
+			-webkit-flex: 2 2;
+			-moz-flex: 2 2;
+			-ms-flex: 2 2;
+			-o-flex: 2 2;
+			flex: 2 2;
+		}
+		</style>
+		<a-counter id="time" animation="super-fast" value="" pattern="[0-9]{2}:[0-9]{2}:[0-9]{2}"></a-counter>
+		<a-counter id="ampm" animation="super-fast" value="" pattern="[AP]M"></a-counter>
+	</template>
+	<script>
+	Polymer('a-clock', {
+		'12hours': false,
+		ready: function() {
+			this.updateTime();
+		},
+		updateTime: function() {
+			var time = new Date();
+			var hours = time.getHours();
+			var ampm = false;
+			if (this['12hours']) {
+				if (hours < 12) {
+					hours = hours === 0 ? 12 : hours;
+					ampm = 'AM';
+				} else {
+					hours = hours - 12;
+					ampm = 'PM';
+				}
+			}
+			
+			this.$.time.value = [hours, time.getMinutes(), time.getSeconds()]
+									.map(function(n) {
+										return n<10 ? '0'+n:n;
+									})
+									.join(':');
+			if (!ampm) {
+				this.$.ampm.style.display = 'none';
+			} else {
+				this.$.ampm.style.display = 'block';
+				this.$.ampm.value = ampm;
+			}
+
+			setTimeout(this.updateTime.bind(this), 1000);
+		}
+	})
+	</script>
+</polymer-element>
